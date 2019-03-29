@@ -1,0 +1,116 @@
+<!DOCTYPE html>  
+<html>
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{
+	height:100%; 
+	
+} 
+ 
+ 
+ #customers
+  {
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+  width:100%;
+  border-collapse:collapse;
+  }
+
+#customers td, #customers th 
+  {
+  font-size:1em;
+  border:1px solid #980000;
+  padding:3px 7px 2px 7px;
+  }
+
+#customers th 
+  {
+  font-size:1.1em;
+  text-align:left;
+  padding-top:5px;
+  padding-bottom:4px;
+  background-color:#A70000;
+  color:#ffffff;
+  }
+
+#customers tr td.alt 
+  {
+  color:#000000;
+  background-color:#EAF2D3;
+  }
+ 
+ 
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DnSK26HDjF1GvFesgQ7yQVwEGBgkmKaE">
+//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+</script>
+</head>  
+ 
+<body>
+	<div id="r-result">
+		城市名: <input id="cityName" type="text" style="width:100px; margin-right:10px;" />
+		<input type="button" value="查询" onclick="theLocation()" />
+	</div>
+<div id="container"></div> 
+<script type="text/javascript"> 
+	
+	
+
+	// 初始化地图，设置中心点坐标和地图级别  
+	var map = new BMap.Map("container");
+	// 创建地图实例  
+	var point = new BMap.Point(125.03,46.58);
+	// 创建点坐标  
+	map.centerAndZoom(point, 15);
+	map.setMapStyle({style:"googlelite"});
+	map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+	//----------
+	// 创建标注    
+	var marker = new BMap.Marker(point);        
+	map.addOverlay(marker);
+	
+	
+	function createMarker(x,y){
+		var point2 = new BMap.Point(x,y);
+		var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/Mario.png", new BMap.Size(23,70));
+		var marker2 = new BMap.Marker(point2,{icon:myIcon});  // 创建标注
+		map.addOverlay(marker2); 
+		var sConstent="<table id='customers'><tr><th>二哥的揽胜</th><th></th><th></th><th>正常</th></tr><tr><td class='alt'>定位类型</td><td>GPS</td><td class='alt'>方向</td><td>正北方12点方向</td></tr><tr><td class='alt'>停止时刻</td><td>2019-2-10 15:20:15</td><td class='alt'>逗留时长</td><td>23分钟</td></tr><tr><td class='alt'>经纬度</td><td>125,46.58</td><td class='alt'>ACC</td><td>熄火</td></table>"	
+		var infoWindow = new BMap.InfoWindow(sConstent);  // 创建信息窗口对象
+		marker2.addEventListener("click", function(){          
+		this.openInfoWindow(infoWindow);
+		//图片加载完毕重绘infowindow
+// 		document.getElementById('imgDemo').onload = function (){
+// 			infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+// 		}
+		});
+	}   
+	   
+	createMarker(125,46.58);
+	createMarker(125.01,46.58);
+	createMarker(125.01,46.59);
+	createMarker(125.05,46.57);
+	//----------
+	//查询城市
+	function theLocation(){
+		var city = document.getElementById("cityName").value;
+		if(city != ""){
+			map.centerAndZoom(city,11);      // 用城市名设置地图中心点
+		}
+	}
+	
+	function myFun(result){
+		var cityName = result.name;
+		map.setCenter(cityName);
+		console.log(result)
+	}
+	var myCity = new BMap.LocalCity();
+	myCity.get(myFun);
+</script>  
+</body>  
+</html>

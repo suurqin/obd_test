@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>layout 后台大布局 - Layui</title>
+  <link rel="stylesheet" href="layui/css/layui.css">
+<style type="text/css">
+.map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+	height:100%;
+}
+
+.right_tab {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+}
+
+</style>
+
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=DnSK26HDjF1GvFesgQ7yQVwEGBgkmKaE"></script>
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">OBD后台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a href="">首页</a></li>
+      <li class="layui-nav-item"><a href="">监控中心</a></li>
+      <li class="layui-nav-item"><a href="">轨迹管理</a></li>
+	  <li class="layui-nav-item"><a href="">电子围栏</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">设备状态</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">设备实时状态</a></dd>
+          <dd><a href="">设备入网统计</a></dd>
+          <dd><a href="">设备流量统计</a></dd>
+          <dd><a href="">离线统计(按批次)</a></dd>
+          <dd><a href="">离线统计(按类型)</a></dd>
+          <dd><a href="">离线明细查询</a></dd>
+        </dl>
+      </li>
+	  <li class="layui-nav-item">
+        <a href="javascript:;">行程统计</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">用户里程统计</a></dd>
+          <dd><a href="">设备里程统计</a></dd>
+          <dd><a href="">设备停靠统计</a></dd>
+		  <dd><a href="">设备行程明细</a></dd>
+		  <dd><a href="">设备轨迹明细</a></dd>
+		  <dd><a href="">未行驶统计</a></dd>
+        </dl>
+      </li>
+	  <li class="layui-nav-item">
+        <a href="javascript:;">报警统计</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">用户报警汇总</a></dd>
+          <dd><a href="">设备报警汇总</a></dd>
+          <dd><a href="">报警分类汇总</a></dd>
+		  <dd><a href="">围栏报警汇总</a></dd>
+		  <dd><a href="">设备报警明细</a></dd>
+        </dl>
+      </li>
+	  <li class="layui-nav-item">
+        <a href="javascript:;">OBD统计</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">里程油耗统计</a></dd>
+          <dd><a href="">行驶车况统计</a></dd>
+          <dd><a href="">驾驶行为统计</a></dd>
+		  <dd><a href="">车辆状态记录</a></dd>
+		  <dd><a href="">故障诊断记录</a></dd>
+		  <dd><a href="">理论加油记录</a></dd>
+		  <dd><a href="">OBD里程</a></dd>
+		  <dd><a href="">OBD报表</a></dd>
+        </dl>
+      </li>
+	  <li class="layui-nav-item">
+        <a href="javascript:;">透传管理</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+	  <li class="layui-nav-item">
+        <a href="javascript:;">运营管理</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">消息管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a href="javascript:;">
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          贤心
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="">退了</a></li>
+    </ul>
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a class="" href="javascript:;">功能中心</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="javascript:;">列表三</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">统计数据</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+		<li class="layui-nav-item">
+          <a href="javascript:;">用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">列表一</a></dd>
+            <dd><a href="javascript:;">列表二</a></dd>
+            <dd><a href="">超链接</a></dd>
+          </dl>
+        </li>
+		<!--
+        <li class="layui-nav-item"><a href="">云市场</a></li>
+        <li class="layui-nav-item"><a href="">发布商品</a></li>
+		-->
+      </ul>
+    </div>
+  </div>
+  
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    <iframe class="map" src="mapTest.html" frameborder="0" id="demoAdmin" ></iframe>
+
+	<div class="layui-tab layui-tab-brief right_tab" lay-filter="docDemoTabBrief">
+	  <ul class="layui-tab-title">
+		<li class="layui-this">网站设置</li>
+		<li>用户管理</li>
+		<li>权限分配</li>
+		<li>商品管理</li>
+		<li>订单管理</li>
+	  </ul>
+	  <div class="layui-tab-content" style="height: 100px;">
+		<div class="layui-tab-item layui-show">
+			<table class="layui-hide" id="test"></table>
+              
+          
+			<script src="layui/layui.all.js" charset="utf-8"></script>
+			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 --> 
+			 
+			<script>
+			layui.use('table', function(){
+			  var table = layui.table;
+			  
+			  table.render({
+				elem: '#test'
+				,url:'/data.json'
+				,cols: [[
+				  {field:'id', width:80, title: 'ID', sort: true}
+				  ,{field:'username', width:80, title: '用户名'}
+				  ,{field:'sex', width:80, title: '性别', sort: true}
+				  ,{field:'city', width:80, title: '城市'}
+				  ,{field:'sign', title: '签名', minWidth: 150}
+				  ,{field:'experience', width:80, title: '积分', sort: true}
+				  ,{field:'score', width:80, title: '评分', sort: true}
+				  ,{field:'classify', width:80, title: '职业'}
+				  ,{field:'wealth', width:135, title: '财富', sort: true}
+				]]
+				,page: true
+			  });
+			});
+			</script>
+		</div>
+		<div class="layui-tab-item">内容2</div>
+		<div class="layui-tab-item">内容3</div>
+		<div class="layui-tab-item">内容4</div>
+		<div class="layui-tab-item">内容5</div>
+	  </div>
+	</div> 
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    © layui.com - 底部固定区域
+  </div>
+</div>
+<script src="layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+</script>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+	//添加地图类型控件
+	map.addControl(new BMap.MapTypeControl({
+		mapTypes:[
+            BMAP_NORMAL_MAP,
+            BMAP_HYBRID_MAP
+        ]}));	  
+	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+</script>
